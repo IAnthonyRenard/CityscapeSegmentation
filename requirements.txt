@@ -4,4 +4,3 @@ tensorflow-cpu==2.12.0
 numpy==1.23.5
 flask==2.3.2
 segmentation-models==1.0.1
-cv2==4.7.0

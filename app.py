@@ -104,7 +104,7 @@ def upload_image():
         
         #########################PREDICTION DU MASQUE################################################
         #image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
-        image='C:/Users/Utilisateur/PROJET8/api/static/uploads/' + filename
+        image='C:/Users/Utilisateur/PROJET8/static/uploads/' + filename
         #print(image)
         mask_t=pipeline.affichage_model_result(image)
         init_img = Image.fromarray((mask_t * 255).astype(np.uint8))

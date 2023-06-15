@@ -1,6 +1,6 @@
 #app.py
 from flask import Flask, flash, request, redirect, url_for, render_template
-import urllib.request
+#import urllib.request
 import os
 from werkzeug.utils import secure_filename
 import pipeline
@@ -8,12 +8,13 @@ from PIL import Image
 import numpy as np
 import shutil
 import cv2
+
 #import glob
 #from pathlib import Path
 
 
 FOLDER_VALIDATION_MASK   = "C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_gtFine_trainvaltest/gtFine"
-
+#FOLDER_VALIDATION_MASK   = "https://drive.google.com/drive/folders/1F1kw_8vWMxurak4wqUMTbKYf9Lxaeqgs?hl=fr"
 
 app = Flask(__name__)
  

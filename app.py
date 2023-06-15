@@ -13,7 +13,7 @@ import cv2
 
 app = Flask(__name__)
  
-UPLOAD_FOLDER = 'static/'
+UPLOAD_FOLDER = 'static/uploads/'
  
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -40,7 +40,7 @@ def upload_image():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         print('nom image: ' + filename)
         
         
@@ -56,7 +56,7 @@ def upload_image():
         #print(image)
         mask_t=pipeline.affichage_model_result(image)
         init_img = Image.fromarray((mask_t * 255).astype(np.uint8))
-        init_img.save('static/mask_image.png')
+        init_img.save('static/uploads/mask_image.png')
         mask_filename = 'mask_image.png'
         print('nom mask: ' + mask_filename)
 
@@ -77,12 +77,12 @@ def upload_image():
 
 @app.route('/display/<filename>')
 def display_image(filename):
-    return redirect(url_for('static', filename= filename), code=301)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 @app.route('/display/<mask_filename>')
 def display_mask(mask_filename):
-    return redirect(url_for('static', filename=mask_filename), code=301) #filename='uploads/' + mask_filename
+    return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
 
 if __name__ == "__main__":
     app.run()

@@ -86,7 +86,7 @@ def display_mask(mask_filename):
     return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
 
 
-@app.route('/', methods=['POST'])
+@app.route('/answer', methods=['POST'])
 def index():
     response = make_response()
     response.data = init_img

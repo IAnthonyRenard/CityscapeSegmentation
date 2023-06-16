@@ -65,8 +65,8 @@ def upload_image():
         flash(filename)
         print(filename)
         #print(mask_filename)
-        #return render_template('index.html',  filename=filename,mask_filename=mask_filename)
-        return send_file(mask_filename, mimetype='image/png')
+        return render_template('index.html',  filename=filename,mask_filename=mask_filename)
+        #return send_file(mask_filename, mimetype='image/png')
         
         #########################FINPREDICTION DU MASQUE################################################
     
@@ -75,7 +75,7 @@ def upload_image():
         return redirect(request.url)
     
     
-'''
+
 @app.route('/display/<filename>')
 def display_image(filename):
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
@@ -84,6 +84,6 @@ def display_image(filename):
 @app.route('/display/<mask_filename>')
 def display_mask(mask_filename):
     return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
-'''
+
 if __name__ == "__main__":
     app.run()

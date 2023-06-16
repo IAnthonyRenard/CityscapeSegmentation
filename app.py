@@ -88,10 +88,11 @@ def display_mask(mask_filename):
    
 @app.route('/result/')
 def result():
-    response = make_response()
+    '''response = make_response()
     response.headers['my-custom-header'] = 'my-custom-status-0'
     response.data = init_img
-    return response
+    return response'''
+    return "Hello World!"
 
 if __name__ == "__main__":
     app.run()

@@ -69,7 +69,7 @@ def upload_image():
         #return send_file(mask_filename, mimetype='image/png')
         
         
-        response = send_from_directory(directory='static/uploads', filename='mask_image.png')
+        response = send_from_directory(app.config['UPLOAD_FOLDER'], filename='mask_image.png')
         response.headers['my-custom-header'] = 'my-custom-status-0'
         print("MASQUE ENVOYEE")
         return response

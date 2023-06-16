@@ -92,8 +92,8 @@ def result():
     response.headers['my-custom-header'] = 'my-custom-status-0'
     response.data = init_img
     return response'''
-    #return "Hello World!"
-    return send_file(filename)
+    return "Hello World!"
+    #return send_file(filename)
 
 if __name__ == "__main__":
     app.run()

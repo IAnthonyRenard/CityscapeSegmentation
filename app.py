@@ -65,7 +65,8 @@ def upload_image():
         flash(filename)
         print(filename)
         #print(mask_filename)
-        return render_template('index.html',  filename=filename,mask_filename=mask_filename)
+        #return render_template('index.html',  filename=filename,mask_filename=mask_filename)
+        return send_file(mask_filename, mimetype='image/png')
         
         #########################FINPREDICTION DU MASQUE################################################
     

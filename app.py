@@ -87,7 +87,7 @@ def display_mask(mask_filename):
 
 
 @app.route('/answer', methods=['POST'])
-def index():
+def answer():
     response = make_response()
     response.data = init_img
     return response

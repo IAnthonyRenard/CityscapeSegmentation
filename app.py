@@ -1,5 +1,5 @@
 #app.py
-from flask import Flask, flash, request, redirect, url_for, render_template, send_file, make_response, send_from_directory
+from flask import Flask, flash, request, redirect, url_for, render_template
 #import urllib.request
 import os
 from werkzeug.utils import secure_filename
@@ -65,14 +65,10 @@ def upload_image():
         flash(filename)
         print(filename)
         #print(mask_filename)
-        #return render_template('index.html',  filename=filename,mask_filename=mask_filename)
+        return render_template('index.html',  filename=filename,mask_filename=mask_filename)
         #return send_file(mask_filename, mimetype='image/png')
         
         
-        response = send_from_directory(app.config['UPLOAD_FOLDER'], filename='mask_image.png')
-        response.headers['my-custom-header'] = 'my-custom-status-0'
-        print("MASQUE ENVOYEE")
-        return response
         #########################FINPREDICTION DU MASQUE################################################
     
     else:

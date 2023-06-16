@@ -65,9 +65,14 @@ def upload_image():
         flash(filename)
         print(filename)
         #print(mask_filename)
-        return render_template('index.html',  filename=filename,mask_filename=mask_filename)
+        #return render_template('index.html',  filename=filename,mask_filename=mask_filename)
         #return send_file(mask_filename, mimetype='image/png')
         
+        
+        response = send_from_directory(directory='static/uploads', filename='mask_image.png')
+        response.headers['my-custom-header'] = 'my-custom-status-0'
+        print("MASQUE ENVOYEE")
+        return response
         #########################FINPREDICTION DU MASQUE################################################
     
     else:
@@ -84,14 +89,7 @@ def display_image(filename):
 @app.route('/display/<mask_filename>')
 def display_mask(mask_filename):
     return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
-
-
-@app.route('/', methods=['POST'])
-def index():
-    response = send_from_directory(directory='static/uploads', filename='mask_image.png')
-    response.headers['my-custom-header'] = 'my-custom-status-0'
-    print("MASQUE ENVOYEE")
-    return response
+   
 
 
 if __name__ == "__main__":

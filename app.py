@@ -90,6 +90,7 @@ def display_mask(mask_filename):
 def index():
     response = send_from_directory(directory='static/uploads', filename='mask_image.png')
     response.headers['my-custom-header'] = 'my-custom-status-0'
+    print("MASQUE ENVOYEE")
     return response
 
 

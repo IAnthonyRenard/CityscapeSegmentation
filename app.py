@@ -1,5 +1,5 @@
 #app.py
-from flask import Flask, flash, request, redirect, url_for, render_template
+from flask import Flask, flash, request, redirect, url_for, render_template, response
 #import urllib.request
 import os
 from werkzeug.utils import secure_filename
@@ -86,7 +86,12 @@ def display_image(filename):
 def display_mask(mask_filename):
     return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
    
-
+@app.route('/result/')
+def result():
+    response = make_response()
+    response.headers['my-custom-header'] = 'my-custom-status-0'
+    response.data = init_img
+    return response
 
 if __name__ == "__main__":
     app.run()

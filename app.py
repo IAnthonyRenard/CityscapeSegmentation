@@ -90,8 +90,8 @@ def display_mask(mask_filename):
    
     
     
-@app.route('/predictapp2')#, methods=['POST'])
-def predictapp2():
+'''@app.route('/predictapp2')#, methods=['POST'])
+def predictapp2():'''
     '''dt= request.get_json()
     image_dt = dt['image']
     #
@@ -100,14 +100,14 @@ def predictapp2():
     pred = model.predict( prep_image)
     return jsonify({'prediction': prediction})'''
 
-    image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
+    '''image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
     #image=UPLOAD_FOLDER + filename
     
     #dt= request.get_json()
     #image_dt = dt['image']
     mask_t=pipeline.affichage_model_result(image)
     dumped = json.dumps(mask_t, cls=NumpyEncoder)
-    return jsonify({'prediction': dumped})
+    return jsonify({'prediction': dumped})'''
     
     
     

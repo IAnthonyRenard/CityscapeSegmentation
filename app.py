@@ -1,5 +1,5 @@
 #app.py
-from flask import Flask, flash, request, redirect, url_for, render_template, make_response,jsonify
+from flask import Flask, flash, request, redirect, url_for, render_template, make_response,jsonify, send_file
 #import urllib.request
 import os
 from werkzeug.utils import secure_filename
@@ -8,9 +8,6 @@ from PIL import Image
 import numpy as np
 import cv2
 import json
-from numpyencoder import NumpyEncoder
-
-
 
 
 app = Flask(__name__)
@@ -45,11 +42,7 @@ def upload_image():
         #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         print('nom image: ' + filename)
         
-        
 
-        
-
-        
         #########################PREDICTION DU MASQUE################################################
         #image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
         #image='C:/Users/Utilisateur/PROJET8/static/uploads/' + filename
@@ -87,29 +80,29 @@ def display_image(filename):
 @app.route('/display/<mask_filename>')
 def display_mask(mask_filename):
     return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
-   
-    
-    
-@app.route('/predictapp2')#, methods=['POST'])
-def predictapp2():
-    '''dt= request.get_json()
-    image_dt = dt['image']
-    #
-    prep_image = prep_image( image_dt )
-    model = appelr_model()
-    pred = model.predict( prep_image)
-    return jsonify({'prediction': prediction})'''
 
+    
+@app.route('/predictapp2', methods=['GET'])
+def predictapp2():
+
+    
+
+    image = request.files['image']
+    image_path = f"static/uploads/{image.filename}"
+    image.save(image_path)
+    
     #image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
     
-    
-    dt= request.get_json()
-    image_dt = dt['image']
-    mask_t=pipeline.affichage_model_result(image_dt)
-    #dumped = json.dumps(mask_t, cls=NumpyEncoder)
-    return jsonify({'prediction':mask_t})# dumped})
+    mask_t=pipeline.affichage_model_result(image_path)
     
     
+    init_img = Image.fromarray((mask_t * 255).astype(np.uint8))
+    init_img.save('static/uploads/mask_image.png')
+    mask_filename = 'mask_image.png'
+    
+    
+    
+    return send_file(UPLOAD_FOLDER + mask_filename, mimetype='image/png')
     
 
 

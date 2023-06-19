@@ -1,5 +1,5 @@
 #app.py
-from flask import Flask, flash, request, redirect, url_for, render_template, make_response
+from flask import Flask, flash, request, redirect, url_for, render_template, make_response,jsonify
 #import urllib.request
 import os
 from werkzeug.utils import secure_filename
@@ -7,6 +7,8 @@ import pipeline
 from PIL import Image
 import numpy as np
 import cv2
+import json
+from numpyencoder import NumpyEncoder
 
 
 
@@ -86,17 +88,9 @@ def display_image(filename):
 def display_mask(mask_filename):
     return redirect(url_for('static', filename='uploads/' + mask_filename), code=301) #filename='uploads/' + mask_filename
    
-@app.route('/result/')
-def result():
-    '''response = make_response()
-    response.headers['my-custom-header'] = 'my-custom-status-0'
-    response.data = init_img
-    return response'''
-    return "Hello World!"
-    #return send_file(filename)
     
     
-@app.route('/predictapp2', methods=['POST'])
+@app.route('/predictapp2')#, methods=['POST'])
 def predictapp2():
     '''dt= request.get_json()
     image_dt = dt['image']
@@ -106,12 +100,16 @@ def predictapp2():
     pred = model.predict( prep_image)
     return jsonify({'prediction': prediction})'''
 
+    image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
+    #image=UPLOAD_FOLDER + filename
     
-    image=UPLOAD_FOLDER + filename
-    dt= request.get_json()
-    image_dt = dt['image']
+    #dt= request.get_json()
+    #image_dt = dt['image']
     mask_t=pipeline.affichage_model_result(image)
-    return jsonify({'prediction': mask_t})
+    dumped = json.dumps(mask_t, cls=NumpyEncoder)
+    return jsonify({'prediction': dumped})
+    
+    
     
 
 

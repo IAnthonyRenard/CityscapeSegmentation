@@ -94,6 +94,26 @@ def result():
     return response'''
     return "Hello World!"
     #return send_file(filename)
+    
+    
+@app.route('/predictapp2', methods=['POST'])
+def predictapp2():
+    '''dt= request.get_json()
+    image_dt = dt['image']
+    #
+    prep_image = prep_image( image_dt )
+    model = appelr_model()
+    pred = model.predict( prep_image)
+    return jsonify({'prediction': prediction})'''
+
+    
+    image=UPLOAD_FOLDER + filename
+    dt= request.get_json()
+    image_dt = dt['image']
+    mask_t=pipeline.affichage_model_result(image)
+    return jsonify({'prediction': mask_t})
+    
+
 
 if __name__ == "__main__":
     app.run()

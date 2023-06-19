@@ -7,8 +7,8 @@ import pipeline
 from PIL import Image
 import numpy as np
 import cv2
-#import json
-#from numpyencoder import NumpyEncoder
+import json
+from numpyencoder import NumpyEncoder
 
 
 
@@ -90,11 +90,28 @@ def display_mask(mask_filename):
    
     
     
+@app.route('/predictapp2')#, methods=['POST'])
+def predictapp2():
+    '''dt= request.get_json()
+    image_dt = dt['image']
+    #
+    prep_image = prep_image( image_dt )
+    model = appelr_model()
+    pred = model.predict( prep_image)
+    return jsonify({'prediction': prediction})'''
 
+    #image ="C:/Users/Utilisateur/PROJET8/input/P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/munster/munster_000034_000019_leftImg8bit.png"
+    
+    
+    dt= request.get_json()
+    image_dt = dt['image']
+    mask_t=pipeline.affichage_model_result(image_dt)
+    #dumped = json.dumps(mask_t, cls=NumpyEncoder)
+    return jsonify({'prediction':mask_t})# dumped})
     
     
     
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='127.0.0.1', port=5001)
